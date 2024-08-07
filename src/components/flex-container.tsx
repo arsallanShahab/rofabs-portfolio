@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { EasingDefinition, motion } from "framer-motion";
 import { forwardRef } from "react";
 
 interface FlexContainerProps {
@@ -34,7 +34,11 @@ interface FlexContainerProps {
   initial?: { [key: string]: any };
   animate?: { [key: string]: any };
   exit?: { [key: string]: any };
-  transition?: { [key: string]: any };
+  transition?: { [key: string]: any } & {
+    duration?: number;
+    ease?: EasingDefinition;
+    type?: "spring" | "tween" | "inertia" | "keyframes" | "just";
+  };
   delay?: number;
 }
 
@@ -165,11 +169,11 @@ const FlexContainer = forwardRef<HTMLDivElement, FlexContainerProps>(
         animate={animate}
         exit={exit}
         transition={{
-          ...transition,
           type: "spring",
           stiffness: 200,
           damping: 13,
           delay: delay,
+          ...transition,
         }}
         ref={ref}
         onClick={onClick}

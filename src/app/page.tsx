@@ -1,15 +1,20 @@
 import FlexContainer from "@/components/flex-container";
 import Tabs from "@/components/tabs";
+import Testimonial from "@/components/testimonial";
 import { Button } from "@/components/ui/button";
 import {
+  ArrowLeft,
   ArrowRight,
   Building,
   Fingerprint,
   QrCode,
+  Quote,
   Scan,
   ScanBarcode,
   ShieldCheck,
   Sparkles,
+  Star,
+  StarHalf,
   Wallet,
   Zap,
 } from "lucide-react";
@@ -208,14 +213,14 @@ export default function Home() {
       </FlexContainer>
       <FlexContainer
         variant="column-start"
-        className="gap-11 bg-zinc-100 px-10 py-20"
+        className="gap-14 bg-purple-50 px-10 pb-40 pt-20"
       >
         <FlexContainer variant="row-center">
           <h3 className="max-w-2xl text-center text-5xl font-medium text-black">
             Why Choose Us?
           </h3>
         </FlexContainer>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-10">
           <FlexContainer
             variant="column-start"
             className="rounded-2xl bg-white p-5"
@@ -261,7 +266,9 @@ export default function Home() {
                 <Fingerprint className="h-6 w-6 text-purple-600" />
               </div>
             </FlexContainer>
-            <h5 className="text-xl font-medium text-black">Secure Payments</h5>
+            <h5 className="font-dm-serif-display text-xl font-medium text-black">
+              Secure Payments
+            </h5>
             <p className="text-sm text-zinc-600">
               Our support team is all set to answer any of your queries with the
               software. Our committed and dedicated support team assists you get
@@ -269,6 +276,289 @@ export default function Home() {
             </p>
           </FlexContainer>
         </div>
+      </FlexContainer>
+      <FlexContainer className="-mt-28 p-10">
+        <FlexContainer
+          variant="column-start"
+          className="pc-10 w-full gap-10 rounded-3xl border border-zinc-200 bg-white py-16 shadow-2xl shadow-zinc-200"
+        >
+          <FlexContainer variant="row-center">
+            <h3 className="max-w-xl text-center font-dm-serif-display text-3xl font-medium text-black">
+              Trusted By 100+ Property Managers
+            </h3>
+          </FlexContainer>
+          <div className="grid grid-cols-3 gap-5">
+            <FlexContainer variant="column-center" className="p-5" gap="md">
+              <Image
+                src={"/trustpilot.png"}
+                width={339}
+                height={140}
+                className="h-auto w-full max-w-[200px] object-contain"
+                alt="trustpilot"
+              />
+              <FlexContainer variant="row-center">
+                {Array.from({ length: 5 }).map((_, index) => {
+                  if (index > 3) {
+                    return (
+                      <div key={index} className="relative">
+                        <StarHalf className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                        <div className="absolute left-3 top-0 h-6 w-1.5 bg-white"></div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Star
+                      key={index}
+                      className="h-6 w-6 fill-yellow-400 text-yellow-400"
+                    />
+                  );
+                })}
+                <span className="text-lg text-zinc-600">4.5 / 5</span>
+              </FlexContainer>
+            </FlexContainer>
+            <FlexContainer variant="column-center" className="p-5">
+              <Image
+                src={"/g2crowd.png"}
+                width={338}
+                height={95}
+                className="h-auto w-full max-w-[200px] object-contain"
+                alt="g2crowd"
+              />
+              <FlexContainer variant="row-center" className="mt-2.5">
+                {Array.from({ length: 5 }).map((_, index) => {
+                  if (index > 3) {
+                    return (
+                      <div key={index} className="relative">
+                        <StarHalf className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                        <div className="absolute left-3 top-0 h-6 w-1.5 bg-white"></div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Star
+                      key={index}
+                      className="h-6 w-6 fill-yellow-400 text-yellow-400"
+                    />
+                  );
+                })}
+                <span className="text-lg text-zinc-600">4.5 / 5</span>
+              </FlexContainer>
+            </FlexContainer>
+            <FlexContainer variant="column-center" className="p-5">
+              {" "}
+              <Image
+                src={"/captera.png"}
+                width={338}
+                height={134}
+                className="h-auto w-full max-w-[200px] object-contain"
+                alt="captera"
+              />{" "}
+              <FlexContainer variant="row-center">
+                {Array.from({ length: 5 }).map((_, index) => {
+                  if (index > 3) {
+                    return (
+                      <div key={index} className="relative">
+                        <StarHalf className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                        <div className="absolute left-3 top-0 h-6 w-1.5 bg-white"></div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <Star
+                      key={index}
+                      className="h-6 w-6 fill-yellow-400 text-yellow-400"
+                    />
+                  );
+                })}
+                <span className="text-lg text-zinc-600">4.5 / 5</span>
+              </FlexContainer>
+            </FlexContainer>
+          </div>
+        </FlexContainer>
+      </FlexContainer>
+      <FlexContainer variant="column-start" className="relative px-10 py-20">
+        <FlexContainer variant="row-center">
+          <h3 className="max-w-xl text-center text-5xl font-medium text-black">
+            What Our Clients Says
+          </h3>
+        </FlexContainer>
+        <Testimonial />
+      </FlexContainer>
+      <FlexContainer variant="column-start" className="bg-zinc-100 px-10 py-20">
+        <div className="grid grid-cols-4 gap-5">
+          <FlexContainer variant="column-start">
+            <h4 className="font-dm-serif-display text-2xl font-medium text-black">
+              Rofabs
+            </h4>
+            <p className="text-sm text-zinc-600">
+              <span className="font-semibold text-black">Address:</span> Plot #
+              682, 5th Floor, Babukhan Rasheed Plaza, Rd Number 36, Gachibouli,
+              Hyderabad, Telangana 500033
+            </p>
+          </FlexContainer>
+          <FlexContainer variant="column-start" className="md:pl-10">
+            <h5 className="text-sm font-semibold text-black">
+              Product Features
+            </h5>
+            <FlexContainer variant="column-start" gap="sm">
+              {[
+                { label: "Front Desk", href: "/" },
+                {
+                  label: "Hotel Booking Engine",
+                  href: "/",
+                },
+                {
+                  label: "Channel manager",
+                  href: "/",
+                },
+                {
+                  label: "Hotel website builder",
+                  href: "/",
+                },
+                {
+                  label: "Hotel Payment Processing",
+                  href: "/",
+                },
+                {
+                  label: "Guest Engagement",
+                  href: "/",
+                },
+                {
+                  label: "Mobile app",
+                  href: "/",
+                },
+                {
+                  label: "Insights",
+                  href: "/",
+                },
+                {
+                  label: "App Store",
+                  href: "/",
+                },
+                {
+                  label: "MetaSearch",
+                  href: "/",
+                },
+              ].map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="text-sm text-zinc-600"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </FlexContainer>
+          </FlexContainer>
+          <FlexContainer variant="column-start">
+            <h5 className="text-sm font-semibold text-black">Business Type</h5>
+            <FlexContainer variant="column-start" gap="sm">
+              {[
+                { label: "Hotel management software", href: "/" },
+                {
+                  label: "Motel management software",
+                  href: "/",
+                },
+                {
+                  label: "Bed & Breakfast software",
+                  href: "/",
+                },
+                {
+                  label: "Guest house software",
+                  href: "/",
+                },
+                {
+                  label: "Hotel reservation software",
+                  href: "/",
+                },
+                {
+                  label: "Property management system",
+                  href: "/",
+                },
+                {
+                  label: "Best Hotel PMS",
+                  href: "/",
+                },
+                {
+                  label: "Lodge management software",
+                  href: "/",
+                },
+                {
+                  label: "Apartment management software",
+                  href: "/",
+                },
+              ].map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="text-sm text-zinc-600"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </FlexContainer>
+          </FlexContainer>
+          <FlexContainer variant="column-start">
+            <h5 className="text-sm font-semibold text-black">Company</h5>
+            <FlexContainer variant="column-start" gap="sm">
+              {[
+                { label: "About Us", href: "/" },
+                {
+                  label: "Careers",
+                  href: "/",
+                },
+                {
+                  label: "Contact Us",
+                  href: "/",
+                },
+                {
+                  label: "Blog",
+                  href: "/",
+                },
+
+                {
+                  label: "Terms & Conditions",
+                  href: "/",
+                },
+                {
+                  label: "Privacy Policy",
+                  href: "/",
+                },
+              ].map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="text-sm text-zinc-600"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </FlexContainer>
+          </FlexContainer>
+        </div>
+      </FlexContainer>
+      <FlexContainer
+        variant="row-between"
+        className="border-t border-t-zinc-300 bg-zinc-100 p-10"
+      >
+        <FlexContainer variant="row-start" gap="sm">
+          <p className="text-sm text-zinc-600">
+            © 2024 Rofabs. All rights reserved.
+          </p>
+          <Link
+            href="/"
+            className="text-sm text-zinc-600 transition-all duration-300 ease-in-out hover:text-zinc-900"
+          >
+            Terms & Conditions
+          </Link>
+          <Link
+            href="/"
+            className="text-sm text-zinc-600 transition-all duration-300 ease-in-out hover:text-zinc-900"
+          >
+            Privacy Policy
+          </Link>
+        </FlexContainer>
+        <p className="text-sm text-zinc-600">Made with ❤️ in Hyderabad</p>
       </FlexContainer>
     </FlexContainer>
   );
