@@ -1,14 +1,15 @@
+"use client";
+
 import FlexContainer from "@/components/flex-container";
 import Tabs from "@/components/tabs";
 import Testimonial from "@/components/testimonial";
-import { Button } from "@/components/ui/button";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import {
-  ArrowLeft,
   ArrowRight,
-  Building,
   Fingerprint,
-  QrCode,
-  Quote,
   Scan,
   ScanBarcode,
   ShieldCheck,
@@ -20,22 +21,111 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { MutableRefObject, useRef } from "react";
+import SplitType from "split-type";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const introRef = useRef();
+  const wrapperRef = useRef();
+
+  useGSAP(
+    () => {
+      // smooth scroll
+      const lenis = new Lenis();
+      lenis.on("scroll", ScrollTrigger.update);
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+
+      const introText = new SplitType("#intro_text", {
+        charClass: "intro-char",
+      });
+
+      gsap.fromTo(
+        introText.chars,
+        {
+          y: "100%",
+          opacity: 0,
+          scale: 0.75,
+        },
+        {
+          y: "0%",
+          opacity: 1,
+          scale: 1,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: "power4.out",
+        },
+      );
+
+      // trusted by
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#trusted_by",
+          start: "top 90%",
+          end: "bottom 20%",
+          scrub: 1,
+        },
+      });
+
+      tl.from("#trusted_by", {
+        y: 50,
+        scale: 0.85,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+      });
+
+      tl.from("#trusted_by_image", {
+        x: 0,
+        scale: 0.85,
+        opacity: 0,
+        duration: 3,
+        ease: "power4.out",
+      });
+
+      tl.from("#trusted_by_image2", {
+        x: 0,
+        scale: 0.85,
+        opacity: 0,
+        duration: 3,
+        ease: "power4.out",
+      });
+
+      // intro text animation
+    },
+    { scope: wrapperRef.current },
+  );
+
   return (
-    <FlexContainer variant="column-start" gap="none">
-      <main className="relative grid min-h-screen grid-cols-3 overflow-hidden px-10">
+    <FlexContainer
+      ref={wrapperRef as unknown as MutableRefObject<HTMLDivElement>}
+      variant="column-start"
+      gap="none"
+      className="relative"
+    >
+      <main className="relative grid min-h-screen grid-cols-2 overflow-hidden px-10 lg:grid-cols-3">
         <FlexContainer
           variant="column-start"
           justifyContent="center"
-          className="z-10 col-span-2 py-10"
+          className="z-10 col-span-2 py-28 lg:py-20"
           gap="lg"
+          ref={introRef as unknown as MutableRefObject<HTMLDivElement>}
         >
-          <h1 className="font-dm-serif-display text-8xl font-bold text-purple-950">
-            All In One Property Management Software
+          {/* All In One */}
+          <span className="font-shadows-into-light text-3xl font-semibold tracking-widest text-blue-600">
+            ALL IN ONE
+          </span>
+          <h1
+            id="intro_text"
+            className="font-shadows-into-light max-w-3xl text-6xl font-bold tracking-widest text-black md:text-8xl"
+          >
+            Property Management Software
           </h1>
-          <p className="mt-4 max-w-2xl text-lg font-medium text-zinc-600">
+          <p className="mt-4 max-w-2xl font-rubik text-base text-zinc-600 md:text-lg">
             Streamline all hotel operations with our fully integrated software,
             handling reservations, room operations, housekeeping, guest
             engagement, and banqueting. Boost efficiency and revenue with this
@@ -50,35 +140,44 @@ export default function Home() {
             </Link>
             <Link
               href="/"
-              className="mt-4 flex items-center justify-center rounded-3xl bg-purple-600 px-5 py-3 font-medium text-white transition-all duration-200 ease-in-out hover:bg-purple-600/90"
+              className="mt-4 flex items-center justify-center rounded-3xl bg-blue-600 px-5 py-3 font-medium text-white transition-all duration-200 ease-in-out hover:bg-blue-600/90"
             >
               Book a Demo
             </Link>
           </FlexContainer>
         </FlexContainer>
-        <Image
-          src={"/hero-main.png"}
-          width={700}
-          height={700}
-          alt="hero"
-          className="absolute right-0 top-1/2 z-50 h-full w-full max-w-xl -translate-y-1/2 transform object-contain"
-        />
+        <FlexContainer variant="row-center" className="col-span-2">
+          <Image
+            src={"/hero-main.png"}
+            width={700}
+            height={700}
+            alt="hero"
+            className="relative right-0 top-1/2 z-50 h-full w-full max-w-xl -translate-y-1/2 transform object-contain lg:absolute"
+          />
+        </FlexContainer>
         <Image
           src={"/bg-blur.png"}
           width={700}
           height={700}
           alt="bg-blur"
-          className="absolute right-0 top-1/2 z-0 h-auto w-full -translate-y-1/2 transform"
+          className="absolute right-0 top-1/2 z-0 h-auto w-1/2 -translate-y-1/2 transform"
         />
       </main>
-      <FlexContainer variant="column-start" className="px-10 py-20">
-        <h3 className="text-center font-work-sans text-4xl text-black">
+      <FlexContainer
+        variant="column-start"
+        className="relative overflow-hidden px-10 py-20"
+      >
+        <h3
+          id="trusted_by"
+          className="text-center font-work-sans text-4xl text-black"
+        >
           Trusted By Over{" "}
           <span className="block text-5xl font-semibold">
             100+ Property Managers
           </span>
         </h3>
         <Image
+          id="trusted_by_image"
           src={"/brand-grid.png"}
           width={2400}
           height={291}
@@ -86,6 +185,7 @@ export default function Home() {
           className="mt-10 h-auto w-full select-none object-contain"
         />
         <Image
+          id="trusted_by_image2"
           src={"/brand-center.png"}
           width={2140}
           height={527}
@@ -93,7 +193,7 @@ export default function Home() {
           className="mt-10 h-auto w-full select-none object-contain px-10"
         />
       </FlexContainer>
-      <FlexContainer variant="column-start" className="px-10 py-20">
+      <FlexContainer variant="column-start" className="relative px-10 py-20">
         <FlexContainer variant="row-center">
           <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
             Essential Features to Seek in Your Property Management Software
@@ -108,7 +208,7 @@ export default function Home() {
           </p>
         </FlexContainer>
       </FlexContainer>
-      <FlexContainer className="px-10 py-10">
+      <FlexContainer className="relative px-10 py-10">
         <FlexContainer
           variant="column-start"
           className="radial_purple_light w-full gap-16 rounded-2xl border px-10 py-20"
@@ -118,7 +218,7 @@ export default function Home() {
               Back Office Admin Features
             </h3>
           </FlexContainer>
-          <div className="grid grid-cols-2 gap-12">
+          <div className="grid gap-12 md:grid-cols-2">
             <div className="flex items-center justify-end">
               <Image
                 src={"/booking.png"}
@@ -157,7 +257,7 @@ export default function Home() {
           </div>
         </FlexContainer>
       </FlexContainer>
-      <div className="grid grid-cols-2 gap-5 p-10">
+      <div className="relative grid gap-5 p-10 md:grid-cols-2">
         <FlexContainer
           variant="column-center"
           className="radial_purple_light_2 rounded-xl border px-5 py-10 transition-all duration-200 ease-in-out hover:bg-purple-50"
@@ -213,7 +313,7 @@ export default function Home() {
       </FlexContainer>
       <FlexContainer
         variant="column-start"
-        className="gap-14 bg-purple-50 px-10 pb-40 pt-20"
+        className="relative gap-14 bg-purple-50 px-10 pb-40 pt-20"
       >
         <FlexContainer variant="row-center">
           <h3 className="max-w-2xl text-center text-5xl font-medium text-black">
@@ -277,7 +377,7 @@ export default function Home() {
           </FlexContainer>
         </div>
       </FlexContainer>
-      <FlexContainer className="-mt-28 p-10">
+      <FlexContainer className="relative -mt-28 p-10">
         <FlexContainer
           variant="column-start"
           className="pc-10 w-full gap-10 rounded-3xl border border-zinc-200 bg-white py-16 shadow-2xl shadow-zinc-200"
@@ -384,7 +484,10 @@ export default function Home() {
         </FlexContainer>
         <Testimonial />
       </FlexContainer>
-      <FlexContainer variant="column-start" className="bg-zinc-100 px-10 py-20">
+      <FlexContainer
+        variant="column-start"
+        className="relative bg-zinc-100 px-10 py-20"
+      >
         <div className="grid grid-cols-4 gap-5">
           <FlexContainer variant="column-start">
             <h4 className="font-dm-serif-display text-2xl font-medium text-black">
@@ -558,7 +661,9 @@ export default function Home() {
             Privacy Policy
           </Link>
         </FlexContainer>
-        <p className="text-sm text-zinc-600">Made with ❤️ in Hyderabad</p>
+        <p className="text-sm text-zinc-600">
+          Made with ❤️ by Vijetha&apos;s Software
+        </p>
       </FlexContainer>
     </FlexContainer>
   );

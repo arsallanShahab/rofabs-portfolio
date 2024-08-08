@@ -34,8 +34,15 @@ const Navbar = (props: Props) => {
       className="fixed top-0 z-[800] h-20 w-full bg-transparent px-10 backdrop-blur-md transition-all duration-200 ease-in-out"
     >
       <FlexContainer variant="row-start" gap="2xl" alignItems="center">
-        <Link href="/">LOGO</Link>
-        <FlexContainer variant="row-start" alignItems="center" gap="sm">
+        <Link href="/" className="font-silkscreen">
+          Rofabs
+        </Link>
+        <FlexContainer
+          variant="row-start"
+          alignItems="center"
+          gap="sm"
+          className="hidden md:flex"
+        >
           <Dropdown title="Business Type">
             <DropdownContent size="lg">
               <DropdownItem
@@ -127,13 +134,13 @@ const Navbar = (props: Props) => {
       >
         <Link
           href="/"
-          className="px-2 py-2 text-sm font-medium text-purple-600 transition-all duration-200 ease-in-out hover:text-black"
+          className="px-2 py-2 text-sm font-medium text-blue-600 transition-all duration-200 ease-in-out hover:text-black"
         >
           Sign In
         </Link>
         <Link
           href="/"
-          className="rounded-3xl bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-all duration-200 ease-in-out hover:bg-purple-600/80"
+          className="rounded-3xl bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-all duration-200 ease-in-out hover:bg-blue-600/80"
         >
           Book a Demo
         </Link>

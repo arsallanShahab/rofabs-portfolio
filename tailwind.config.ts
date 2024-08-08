@@ -22,6 +22,8 @@ const config = {
         "work-sans": ["Work Sans", "sans-serif"],
         rubik: ["Rubik", "sans-serif"],
         "dm-serif-display": ["DM Serif Display", "serif"],
+        silkscreen: ["Silkscreen", "sans-serif"],
+        "shadows-into-light": ["Shadows Into Light", "cursive"],
       },
       keyframes: {
         "accordion-down": {
