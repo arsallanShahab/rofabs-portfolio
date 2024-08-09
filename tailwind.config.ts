@@ -24,6 +24,7 @@ const config = {
         "dm-serif-display": ["DM Serif Display", "serif"],
         silkscreen: ["Silkscreen", "sans-serif"],
         "shadows-into-light": ["Shadows Into Light", "cursive"],
+        poppins: ["Poppins", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

@@ -121,11 +121,11 @@ export default function Home() {
           </span>
           <h1
             id="intro_text"
-            className="font-shadows-into-light max-w-3xl text-6xl font-bold tracking-widest text-black md:text-8xl"
+            className="font-poppins max-w-3xl text-6xl font-black tracking-tight text-[#201232] md:text-8xl"
           >
             Property Management Software
           </h1>
-          <p className="mt-4 max-w-2xl font-rubik text-base text-zinc-600 md:text-lg">
+          <p className="mt-4 max-w-2xl text-base font-medium text-zinc-600 md:text-xl">
             Streamline all hotel operations with our fully integrated software,
             handling reservations, room operations, housekeeping, guest
             engagement, and banqueting. Boost efficiency and revenue with this
