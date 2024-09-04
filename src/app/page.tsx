@@ -228,9 +228,12 @@ export default function Home() {
           className="mt-10 h-auto w-full select-none object-contain"
         />
       </FlexContainer>
-      <FlexContainer variant="column-start" className="relative px-10 py-20">
+      <FlexContainer
+        variant="column-start"
+        className="relative px-5 py-20 md:px-10"
+      >
         <FlexContainer variant="row-center">
-          <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
+          <h3 className="max-w-2xl text-center font-dm-serif-display text-4xl font-medium text-black md:text-5xl">
             Essential Features to Seek in Your Property Management Software
           </h3>
         </FlexContainer>
@@ -243,7 +246,7 @@ export default function Home() {
           </p>
         </FlexContainer>
       </FlexContainer>
-      <FlexContainer className="relative px-5 py-10 md:px-10">
+      <FlexContainer className="relative px-2.5 py-10 md:px-10">
         <FlexContainer
           variant="column-start"
           className="radial_purple_light w-full gap-16 rounded-2xl border px-10 py-20"
@@ -253,7 +256,7 @@ export default function Home() {
               Back Office Admin Features
             </h3>
           </FlexContainer>
-          <div className="grid gap-12 md:grid-cols-5">
+          <div className="grid gap-6 md:grid-cols-5 md:gap-12">
             <div className="col-span-full flex items-center justify-end md:col-span-2">
               <Image
                 src={"/booking.png"}
@@ -263,7 +266,7 @@ export default function Home() {
                 alt="booking"
               />
             </div>
-            <div className="col-span-full grid grid-cols-2 gap-5 md:col-span-3">
+            <div className="col-span-full grid grid-cols-2 gap-2.5 md:col-span-3">
               <FlexContainer variant="column-start" className="gap-14">
                 <FlexContainer variant="row-start" gap="lg" alignItems="center">
                   <Zap className="h-6 w-5 text-purple-600" />
@@ -332,7 +335,7 @@ export default function Home() {
           </div>
         </FlexContainer>
       </FlexContainer>
-      <div className="relative grid gap-5 p-10 md:grid-cols-2">
+      <div className="relative grid gap-5 px-5 md:grid-cols-2 md:p-10">
         <FlexContainer
           variant="column-center"
           className="radial_purple_light_2 rounded-xl border px-5 py-10 transition-all duration-200 ease-in-out hover:bg-purple-50"
@@ -380,41 +383,41 @@ export default function Home() {
       </div>
       <FlexContainer
         variant="column-start"
-        className="relative gap-12 px-10 py-10"
+        className="relative gap-12 px-5 py-10 md:px-10"
       >
         <FlexContainer variant="row-center">
-          <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
+          <h3 className="max-w-2xl text-center font-dm-serif-display text-4xl font-medium text-black md:text-5xl">
             Manage your Hotel Operations with Ease with Rofabs
           </h3>
         </FlexContainer>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          <Link href={"/material-management"}>
-            <FlexContainer
-              variant="column-start"
-              className="rounded-xl border bg-white p-4 shadow-xl"
-            >
-              <Image
-                src={"https://picsum.photos/id/237/500/500"}
-                width={500}
-                height={500}
-                alt="image"
-                className="h-auto max-h-[200px] w-full rounded-xl object-cover"
-              />
-              <h5 className="font-dm-serif-display text-xl font-medium text-black">
-                Material Management Module
-              </h5>
-              <p className="text-zinc-600">
-                The Hotel Software Material Management module manages Stock
-                transfers, Stock adjustments, Stock Valuation, Stock Reports,
-                Stock Ledger
-              </p>
-              <FlexContainer variant="row-end">
+          {/* <Link href={"/material-management"}> */}
+          <FlexContainer
+            variant="column-start"
+            className="rounded-2xl border bg-white p-4 shadow-xl md:rounded-xl"
+          >
+            <Image
+              src={"https://picsum.photos/id/237/500/500"}
+              width={500}
+              height={500}
+              alt="image"
+              className="h-auto max-h-[200px] w-full rounded-xl object-cover"
+            />
+            <h5 className="font-dm-serif-display text-xl font-medium text-black">
+              Material Management Module
+            </h5>
+            <p className="text-zinc-600">
+              The Hotel Software Material Management module manages Stock
+              transfers, Stock adjustments, Stock Valuation, Stock Reports,
+              Stock Ledger
+            </p>
+            {/* <FlexContainer variant="row-end">
                 <Button variant="ghost" className="rounded-3xl">
                   Learn More <ChevronRight className="h-4 w-4" />
                 </Button>
-              </FlexContainer>
-            </FlexContainer>
-          </Link>
+              </FlexContainer> */}
+          </FlexContainer>
+          {/* </Link> */}
           <FlexContainer
             variant="column-start"
             className="rounded-xl border bg-white p-4 shadow-xl"
@@ -474,9 +477,12 @@ export default function Home() {
           </FlexContainer>
         </div>
       </FlexContainer>
-      <FlexContainer variant="column-start" className="gap-11 px-10 py-20">
+      <FlexContainer
+        variant="column-start"
+        className="gap-11 px-5 py-20 md:px-10"
+      >
         <FlexContainer variant="row-center">
-          <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
+          <h3 className="max-w-2xl text-center font-dm-serif-display text-3xl font-medium text-black md:text-5xl">
             {/* Managing and Serving different type of properties{" "} */}
             Features to Look for in a Property Management Software
           </h3>
@@ -485,7 +491,7 @@ export default function Home() {
       </FlexContainer>
       <FlexContainer
         variant="column-start"
-        className="relative gap-14 bg-purple-50 px-10 pb-40 pt-20"
+        className="relative gap-14 bg-purple-50 px-5 pb-40 pt-20 md:px-10"
       >
         <FlexContainer variant="row-center">
           <h3 className="max-w-2xl text-center text-5xl font-medium text-black">
@@ -549,7 +555,7 @@ export default function Home() {
           </FlexContainer>
         </div>
       </FlexContainer>
-      <FlexContainer className="relative -mt-28 p-5 md:p-10">
+      <FlexContainer className="relative -mt-28 p-2.5 md:p-10">
         <FlexContainer
           variant="column-start"
           className="w-full gap-10 rounded-3xl border border-zinc-200 bg-white px-10 py-16 shadow-2xl shadow-zinc-200"
@@ -648,9 +654,13 @@ export default function Home() {
           </div>
         </FlexContainer>
       </FlexContainer>
-      <FlexContainer variant="column-start" className="relative px-10 py-20">
+      <FlexContainer
+        variant="column-start"
+        className="relative px-5 py-20 md:px-10"
+        gap="3xl"
+      >
         <FlexContainer variant="row-center">
-          <h3 className="max-w-xl text-center text-5xl font-medium text-black">
+          <h3 className="max-w-xl text-center text-3xl font-medium text-black md:text-5xl">
             What Our Clients Says
           </h3>
         </FlexContainer>
@@ -658,7 +668,7 @@ export default function Home() {
       </FlexContainer>
       <FlexContainer
         variant="column-start"
-        className="relative px-10 py-20"
+        className="relative px-5 md:px-10 py-20"
         gap="3xl"
         id="pricing"
       >
