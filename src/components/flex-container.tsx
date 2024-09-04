@@ -17,6 +17,11 @@ interface FlexContainerProps {
     | "3xl"
     | "4xl"
     | "5xl"
+    | "6xl"
+    | "7xl"
+    | "8xl"
+    | "9xl"
+    | "10xl"
     | "none";
   variant?:
     | "row-center"
@@ -40,6 +45,7 @@ interface FlexContainerProps {
     type?: "spring" | "tween" | "inertia" | "keyframes" | "just";
   };
   delay?: number;
+  id?: string;
 }
 
 const getVariantClass = (variant: FlexContainerProps["variant"]) => {
@@ -85,6 +91,16 @@ const getGapClass = (gap: FlexContainerProps["gap"]) => {
       return "gap-8";
     case "5xl":
       return "gap-9";
+    case "6xl":
+      return "gap-10";
+    case "7xl":
+      return "gap-11";
+    case "8xl":
+      return "gap-12";
+    case "9xl":
+      return "gap-13";
+    case "10xl":
+      return "gap-14";
     case "none":
       return "gap-0";
     default:
@@ -155,6 +171,7 @@ const FlexContainer = forwardRef<HTMLDivElement, FlexContainerProps>(
       exit = {},
       transition = {},
       delay,
+      id,
     },
     ref,
   ) => {
@@ -165,6 +182,7 @@ const FlexContainer = forwardRef<HTMLDivElement, FlexContainerProps>(
     const justifyContentClass = getJustifyContentClass(justifyContent);
     return (
       <motion.div
+        id={id}
         initial={initial}
         animate={animate}
         exit={exit}

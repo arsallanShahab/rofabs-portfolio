@@ -19,7 +19,7 @@ const Testimonial = (props: Props) => {
             setActiveIndex(activeIndex - 1);
           }
         }}
-        className="absolute left-10 top-1/2 cursor-pointer rounded-3xl bg-zinc-900 p-5 transition-all duration-200 ease-in-out hover:bg-zinc-800 active:scale-90"
+        className="absolute left-5 top-1/3 cursor-pointer rounded-3xl bg-zinc-900 p-5 transition-all duration-200 ease-in-out hover:bg-zinc-800 active:scale-90 md:left-10 md:top-1/2"
       >
         <ArrowLeft className="h-4 w-4 text-white" />
       </div>
@@ -31,7 +31,7 @@ const Testimonial = (props: Props) => {
             setActiveIndex(activeIndex + 1);
           }
         }}
-        className="absolute right-10 top-1/2 cursor-pointer rounded-3xl bg-zinc-900 p-5 transition-all duration-200 ease-in-out hover:bg-zinc-800 active:scale-90"
+        className="absolute right-5 top-1/3 cursor-pointer rounded-3xl bg-zinc-900 p-5 transition-all duration-200 ease-in-out hover:bg-zinc-800 active:scale-90 md:right-10 md:top-1/2"
       >
         <ArrowRight className="h-4 w-4 text-white" />
       </div>
@@ -41,7 +41,7 @@ const Testimonial = (props: Props) => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}
           variant="column-center"
-          className="p-10"
+          className="p-0 md:p-10"
           gap="xl"
         >
           <Image
@@ -59,13 +59,13 @@ const Testimonial = (props: Props) => {
               Sydney, Australia
             </p>
           </FlexContainer>
-          <p className="relative max-w-4xl text-center font-rubik text-2xl font-medium leading-normal text-zinc-800">
+          <p className="relative max-w-4xl text-center font-rubik text-base font-medium leading-normal text-zinc-800 md:text-2xl">
             &quot;It’s so easy to use! And it pulls all the information into one
             place and I can access it from anywhere. Brilliant really. Very
             helpful support staff too. We felt the product on offer was better
             than the others. It was clearer to read and easier to use.&quot;
-            <Quote className="absolute -left-20 -top-16 h-16 w-16 rotate-180 text-purple-200" />
-            <Quote className="absolute -bottom-5 -right-20 h-16 w-16 text-purple-200" />
+            <Quote className="absolute -top-16 left-0 h-10 w-10 rotate-180 text-purple-200 md:-left-20 md:h-16 md:w-16" />
+            <Quote className="absolute -bottom-5 right-0 h-10 w-10 text-purple-200 md:-right-20 md:h-16 md:w-16" />
           </p>
         </FlexContainer>
       )}
@@ -76,7 +76,7 @@ const Testimonial = (props: Props) => {
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.5, damping: 14 }}
           variant="column-center"
-          className="p-10"
+          className="md:p-10"
           gap="xl"
         >
           <Image
@@ -94,13 +94,13 @@ const Testimonial = (props: Props) => {
               Tokyo, Japan
             </p>
           </FlexContainer>
-          <p className="relative max-w-4xl text-center font-rubik text-2xl font-semibold text-zinc-800">
+          <p className="relative max-w-4xl text-center font-rubik text-base font-semibold text-zinc-800 md:text-2xl">
             &quot;It’s so easy to use! And it pulls all the information into one
             place and I can access it from anywhere. Brilliant really. Very
             helpful support staff too. We felt the product on offer was better
             than the others. It was clearer to read and easier to use.&quot;
-            <Quote className="absolute -left-20 -top-16 h-16 w-16 rotate-180 text-purple-200" />
-            <Quote className="absolute -bottom-5 -right-20 h-16 w-16 text-purple-200" />
+            <Quote className="absolute -top-16 left-0 h-10 w-10 rotate-180 text-purple-200 md:-left-20 md:h-16 md:w-16" />
+            <Quote className="absolute -bottom-5 right-0 h-10 w-10 text-purple-200 md:-right-20 md:h-16 md:w-16" />
           </p>
         </FlexContainer>
       )}
@@ -111,7 +111,7 @@ const Testimonial = (props: Props) => {
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.5, damping: 14 }}
           variant="column-center"
-          className="p-10"
+          className="md:p-10"
           gap="xl"
         >
           <Image
@@ -129,13 +129,13 @@ const Testimonial = (props: Props) => {
               Berlin, Germany
             </p>
           </FlexContainer>
-          <p className="relative max-w-4xl text-center font-rubik text-2xl font-semibold text-zinc-800">
+          <p className="relative max-w-4xl text-center font-rubik text-base font-semibold text-zinc-800 md:text-2xl">
             &quot;It’s so easy to use! And it pulls all the information into one
             place and I can access it from anywhere. Brilliant really. Very
             helpful support staff too. We felt the product on offer was better
             than the others. It was clearer to read and easier to use.&quot;
-            <Quote className="absolute -left-20 -top-16 h-16 w-16 rotate-180 text-purple-200" />
-            <Quote className="absolute -bottom-5 -right-20 h-16 w-16 text-purple-200" />
+            <Quote className="absolute -top-16 left-0 h-10 w-10 rotate-180 text-purple-200 md:-left-20 md:h-16 md:w-16" />
+            <Quote className="absolute -bottom-5 right-0 h-10 w-10 text-purple-200 md:-right-20 md:h-16 md:w-16" />
           </p>
         </FlexContainer>
       )}

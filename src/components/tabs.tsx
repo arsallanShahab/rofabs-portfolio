@@ -11,74 +11,74 @@ type Props = {};
 
 const Tabs = (props: Props) => {
   const [activeTab, setActiveTab] = useState<
-    "hotels" | "guest-house" | "vacation-rentals" | "lodges" | "resorts"
-  >("hotels");
+    "checkin-checkout" | "employee" | "inventory" | "kitchen" | "restaurant"
+  >("checkin-checkout");
   return (
     <AnimatePresence>
-      <FlexContainer variant="row-center">
+      <FlexContainer variant="row-center" wrap="wrap">
         <Button
-          variant={activeTab === "hotels" ? "default" : "ghost"}
+          variant={activeTab === "checkin-checkout" ? "default" : "ghost"}
           className={cn(
             "h-auto rounded-3xl font-medium shadow-none transition-all duration-300 ease-in-out",
-            activeTab === "hotels"
+            activeTab === "checkin-checkout"
               ? "bg-purple-600 px-6 text-white hover:bg-purple-500"
               : "text-black",
           )}
-          onClick={() => setActiveTab("hotels")}
+          onClick={() => setActiveTab("checkin-checkout")}
         >
-          Hotels
+          Checkin checkout
         </Button>
         <Button
-          variant={activeTab === "guest-house" ? "default" : "ghost"}
+          variant={activeTab === "employee" ? "default" : "ghost"}
           className={cn(
             "rounded-3xl shadow-none transition-all duration-300 ease-in-out",
-            activeTab === "guest-house"
+            activeTab === "employee"
               ? "bg-purple-600 px-6 text-white hover:bg-purple-500"
               : "text-black",
           )}
-          onClick={() => setActiveTab("guest-house")}
+          onClick={() => setActiveTab("employee")}
         >
-          Guest House
+          Employee management
         </Button>
         <Button
-          variant={activeTab === "vacation-rentals" ? "default" : "ghost"}
+          variant={activeTab === "inventory" ? "default" : "ghost"}
           className={cn(
             "rounded-3xl shadow-none transition-all duration-300 ease-in-out",
-            activeTab === "vacation-rentals"
+            activeTab === "inventory"
               ? "bg-purple-600 px-6 text-white hover:bg-purple-500"
               : "text-black",
           )}
-          onClick={() => setActiveTab("vacation-rentals")}
+          onClick={() => setActiveTab("inventory")}
         >
-          Vacation Rentals
+          Inventory & Vendor management
         </Button>
         <Button
-          variant={activeTab === "lodges" ? "default" : "ghost"}
+          variant={activeTab === "kitchen" ? "default" : "ghost"}
           className={cn(
             "rounded-3xl shadow-none transition-all duration-300 ease-in-out",
-            activeTab === "lodges"
+            activeTab === "kitchen"
               ? "bg-purple-600 px-6 text-white hover:bg-purple-500"
               : "text-black",
           )}
-          onClick={() => setActiveTab("lodges")}
+          onClick={() => setActiveTab("kitchen")}
         >
-          Lodges
+          Kitchen management:
         </Button>
         <Button
-          variant={activeTab === "resorts" ? "default" : "ghost"}
+          variant={activeTab === "restaurant" ? "default" : "ghost"}
           className={cn(
             "rounded-3xl shadow-none transition-all duration-300 ease-in-out",
-            activeTab === "resorts"
+            activeTab === "restaurant"
               ? "bg-purple-600 px-6 text-white hover:bg-purple-500"
               : "text-black",
           )}
-          onClick={() => setActiveTab("resorts")}
+          onClick={() => setActiveTab("restaurant")}
         >
-          Resorts
+          Restaurant management
         </Button>
       </FlexContainer>
-      <div className="mt-5 grid grid-cols-3 gap-5">
-        {activeTab === "hotels" && (
+      <div className="mt-5 grid gap-5 px-0 md:grid-cols-2 md:px-10">
+        {activeTab === "checkin-checkout" && (
           <FlexContainer
             key={activeTab}
             initial={{ opacity: 0, x: 60 }}
@@ -88,48 +88,20 @@ const Tabs = (props: Props) => {
             variant="column-start"
             gap="3xl"
           >
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative z-10 rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Property Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  Rofabs Property Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Check In and Check Out module:"
+              description=" rofabs is integrated with 67 OTA platforms world wide in which some famous OTA's are Bookings.com , Goibibo , Make my trip , Agoda , Airbnb , hostel world .etcUpcoming bookings , currents bookings ,bookings history , property management,room management , Checkin , checkout  , house keeping management "
+            />
 
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Material Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  Rofabs Guest House Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Employee management module:"
+              description="This helps the hotel administration to onboard new employees and their database , education , work time , punch in - punch out time records , No. of work hours , leave records , attendance reports , Client calls , leads , follow up reports , weekly , monthly employees performance reports , automated generation of payslips , allowance records , Loan records , travel and leave management , realtime location based punch in for marketing teams , client call records and reviews , project reports ."
+            />
           </FlexContainer>
         )}
-        {activeTab === "guest-house" && (
+        {activeTab === "employee" && (
           <FlexContainer
             key={activeTab}
             initial={{ opacity: 0, x: 60 }}
@@ -138,49 +110,22 @@ const Tabs = (props: Props) => {
             variant="column-start"
             gap="3xl"
           >
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative z-10 rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  {/* add a title for guest house */}
-                  Guest House Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Property Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Guest House Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Guest House Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Employee management module:"
+              description="This helps the hotel administration to onboard new employees
+                  and their database , education , work time , punch in - punch
+                  out time records , No. of work hours , leave records ,
+                  attendance reports , Client calls , leads , follow up reports
+                  , weekly , monthly employees performance reports , automated
+                  generation of payslips , allowance records , Loan records ,
+                  travel and leave management , realtime location based punch in
+                  for marketing teams , client call records and reviews ,
+                  project reports ."
+            />
           </FlexContainer>
         )}
-        {activeTab === "vacation-rentals" && (
+        {activeTab === "inventory" && (
           <FlexContainer
             key={activeTab}
             initial={{ opacity: 0, x: 60 }}
@@ -189,48 +134,19 @@ const Tabs = (props: Props) => {
             variant="column-start"
             gap="3xl"
           >
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative z-10 rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Vacation Rentals Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Property Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Vacation Rentals Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Guest House Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Inventory & Vendor management"
+              description=" A record of what equipments,kits and products needed in hotel
+                  such as electronic , hygiene will be stored in our database ..
+                  what are the price quoted by different vendors to the hotel
+                  and detailed analysis will be available ... Hotel
+                  administration can compare the prices and choose what exactly
+                  they need to procure ."
+            />
           </FlexContainer>
         )}
-        {activeTab === "lodges" && (
+        {activeTab === "kitchen" && (
           <FlexContainer
             key={activeTab}
             initial={{ opacity: 0, x: 60 }}
@@ -239,48 +155,20 @@ const Tabs = (props: Props) => {
             variant="column-start"
             gap="3xl"
           >
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative z-10 rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Lodges Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Property Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Lodges Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Guest House Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Kitchen management:"
+              description="Raw material procured , their expiry dates , consumption
+                  reports , daily / weekly / Monthly consumption reports ,
+                  dedicated AI analyse the products purchase date , expiry date
+                  and consumption and give us an accurate suggestion of what
+                  quantity of products should be exactly procured for the next
+                  month so that there will be no or minimal waste of raw
+                  materials.."
+            />
           </FlexContainer>
         )}
-        {activeTab === "resorts" && (
+        {activeTab === "restaurant" && (
           <FlexContainer
             key={activeTab}
             initial={{ opacity: 0, x: 60 }}
@@ -289,49 +177,49 @@ const Tabs = (props: Props) => {
             variant="column-start"
             gap="3xl"
           >
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative z-10 rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Resort Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Property Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
-
-            <div className="relative">
-              <div className="absolute -top-3 left-3 z-20 inline-block rounded-xl bg-purple-600 p-3">
-                <Building className="h-5 w-5 text-white" />
-              </div>
-              <FlexContainer
-                variant="column-start"
-                className="relative rounded-2xl bg-zinc-100 p-7"
-                gap="sm"
-              >
-                <h3 className="mt-3 text-xl font-medium text-black">
-                  Resort Management
-                </h3>
-                <p className="text-sm text-zinc-600">
-                  ROfabs Guest House Management Software is a comprehensive
-                  software suite consisting of integrated modules for various
-                  aspects of hotel management.
-                </p>
-              </FlexContainer>
-            </div>
+            <TabContent
+              logo={<Building className="h-5 w-5 text-white" />}
+              title="Restaurant management :"
+              description="Hotels and resorts can have 1 or more than 1 restaurents Such
+                  as poolside restaurant , roof top restaurant , inhouse dining
+                  , bar etc... Our software helps the hotel authorities to
+                  manage the orders Billings properly . We have a dedicated POS
+                  Module Type of sale : whether it is a room sale ( orders from
+                  rooms in hotel ), restaurant sale ( orders taken marking the
+                  table no ) , online order ( swiggy , Zomato) , Take away"
+            />
           </FlexContainer>
         )}
       </div>
     </AnimatePresence>
+  );
+};
+
+interface TabContentProps {
+  logo: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+export const TabContent = ({ logo, title, description }: TabContentProps) => {
+  return (
+    <div className="relative">
+      <FlexContainer
+        variant="column-start"
+        className="relative rounded-2xl p-3"
+        gap="sm"
+      >
+        {" "}
+        <div>
+          {" "}
+          <div className="z-20 inline-block rounded-xl bg-purple-600 p-3">
+            {logo}
+          </div>
+        </div>
+        <h3 className="text-2xl font-medium text-black">{title}</h3>
+        <p className="text-base text-zinc-800">{description}</p>
+      </FlexContainer>
+    </div>
   );
 };
 

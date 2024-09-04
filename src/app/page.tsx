@@ -1,14 +1,24 @@
 "use client";
 
 import FlexContainer from "@/components/flex-container";
+import PricingTable from "@/components/pricing-table";
 import Tabs from "@/components/tabs";
 import Testimonial from "@/components/testimonial";
+import { Button } from "@/components/ui/button";
 import { useGSAP } from "@gsap/react";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+} from "@nextui-org/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import {
   ArrowRight,
+  ChevronRight,
   Fingerprint,
   Scan,
   ScanBarcode,
@@ -21,12 +31,13 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import SplitType from "split-type";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
+  const gridRef = useRef();
   const introRef = useRef();
   const wrapperRef = useRef();
 
@@ -49,14 +60,14 @@ export default function Home() {
         {
           y: "100%",
           opacity: 0,
-          scale: 0.75,
+          scale: 0.9,
         },
         {
           y: "0%",
           opacity: 1,
           scale: 1,
           duration: 0.5,
-          stagger: 0.05,
+          stagger: 0.02,
           ease: "power4.out",
         },
       );
@@ -87,18 +98,50 @@ export default function Home() {
         ease: "power4.out",
       });
 
-      tl.from("#trusted_by_image2", {
-        x: 0,
-        scale: 0.85,
-        opacity: 0,
-        duration: 3,
-        ease: "power4.out",
-      });
-
       // intro text animation
     },
     { scope: wrapperRef.current },
   );
+
+  useEffect(() => {
+    const grid = gridRef.current as unknown as HTMLDivElement;
+    const gridCols = 12;
+    const gridRows = 10;
+
+    const createGrid = () => {
+      for (let i = 0; i < gridCols * gridRows; i++) {
+        const div = document.createElement("div") as HTMLDivElement;
+        div.classList.add("w-full", "h-full", "hover-grid-item");
+        // div.style.backgroundColor = `hsla(${Math.random() * 360}, 100%, 50%, 0.1)`;
+        div.style.borderRight = "1px solid rgba(0, 0, 0, 0.065)";
+        div.style.borderBottom = "1px solid rgba(0, 0, 0, 0.065)";
+        div.style.gridColumn = `${(i % gridCols) + 1} / span 1`;
+        div.style.gridRow = `${Math.floor(i / gridCols) + 1} / span 1`;
+
+        grid.appendChild(div);
+      }
+    };
+
+    //animate grid items randomly withouth hover
+    const animateGrid = () => {
+      const gridItems = document.querySelectorAll(".hover-grid-item");
+      gridItems.forEach((item) => {
+        gsap.to(item, {
+          x: Math.random() * 10 - 5,
+          y: Math.random() * 10 - 5,
+          duration: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+        });
+      });
+    };
+
+    if (grid) {
+      createGrid();
+      // animateGrid();
+    }
+  }, [gridRef]);
 
   return (
     <FlexContainer
@@ -107,7 +150,7 @@ export default function Home() {
       gap="none"
       className="relative"
     >
-      <main className="relative grid min-h-screen grid-cols-2 overflow-hidden px-10 lg:grid-cols-3">
+      <main className="relative grid min-h-screen grid-cols-2 overflow-hidden px-5 md:px-10 lg:grid-cols-3">
         <FlexContainer
           variant="column-start"
           justifyContent="center"
@@ -116,12 +159,12 @@ export default function Home() {
           ref={introRef as unknown as MutableRefObject<HTMLDivElement>}
         >
           {/* All In One */}
-          <span className="font-shadows-into-light text-3xl font-semibold tracking-widest text-blue-600">
+          <span className="font-giest-mono text-xl font-semibold tracking-widest text-blue-600 md:text-3xl">
             ALL IN ONE
           </span>
           <h1
             id="intro_text"
-            className="font-poppins max-w-3xl text-6xl font-black tracking-tight text-[#201232] md:text-8xl"
+            className="max-w-3xl font-poppins text-5xl font-black tracking-tight text-[#201232] md:text-8xl"
           >
             Property Management Software
           </h1>
@@ -184,14 +227,6 @@ export default function Home() {
           alt="trusted-by"
           className="mt-10 h-auto w-full select-none object-contain"
         />
-        <Image
-          id="trusted_by_image2"
-          src={"/brand-center.png"}
-          width={2140}
-          height={527}
-          alt="trusted-by"
-          className="mt-10 h-auto w-full select-none object-contain px-10"
-        />
       </FlexContainer>
       <FlexContainer variant="column-start" className="relative px-10 py-20">
         <FlexContainer variant="row-center">
@@ -208,7 +243,7 @@ export default function Home() {
           </p>
         </FlexContainer>
       </FlexContainer>
-      <FlexContainer className="relative px-10 py-10">
+      <FlexContainer className="relative px-5 py-10 md:px-10">
         <FlexContainer
           variant="column-start"
           className="radial_purple_light w-full gap-16 rounded-2xl border px-10 py-20"
@@ -218,8 +253,8 @@ export default function Home() {
               Back Office Admin Features
             </h3>
           </FlexContainer>
-          <div className="grid gap-12 md:grid-cols-2">
-            <div className="flex items-center justify-end">
+          <div className="grid gap-12 md:grid-cols-5">
+            <div className="col-span-full flex items-center justify-end md:col-span-2">
               <Image
                 src={"/booking.png"}
                 width={918}
@@ -228,32 +263,72 @@ export default function Home() {
                 alt="booking"
               />
             </div>
-            <FlexContainer variant="column-start" className="gap-14">
-              <FlexContainer variant="row-start" gap="lg" alignItems="center">
-                <Zap className="h-6 w-5 text-purple-600" />
-                <h5 className="text-base font-medium text-zinc-600">
-                  Property Listing
-                </h5>
+            <div className="col-span-full grid grid-cols-2 gap-5 md:col-span-3">
+              <FlexContainer variant="column-start" className="gap-14">
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Zap className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Property Listing
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <ScanBarcode className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Property customisation
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Wallet className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Receive payments by card/cash
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Scan className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    QR based bill receipt
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Scan className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    business developmemt moudles
+                  </h5>
+                </FlexContainer>
               </FlexContainer>
-              <FlexContainer variant="row-start" gap="lg" alignItems="center">
-                <ScanBarcode className="h-6 w-5 text-purple-600" />
-                <h5 className="text-base font-medium text-zinc-600">
-                  Property customisation
-                </h5>
+              <FlexContainer variant="column-start" className="gap-14">
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Zap className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    OTA Integration
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <ScanBarcode className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Rate Plan Management
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Wallet className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Room Management
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Scan className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    Swiggy & Zomato Integration
+                  </h5>
+                </FlexContainer>
+                <FlexContainer variant="row-start" gap="lg" alignItems="center">
+                  <Scan className="h-6 w-5 text-purple-600" />
+                  <h5 className="text-base font-medium text-zinc-600">
+                    AI Integration
+                  </h5>
+                </FlexContainer>
               </FlexContainer>
-              <FlexContainer variant="row-start" gap="lg" alignItems="center">
-                <Wallet className="h-6 w-5 text-purple-600" />
-                <h5 className="text-base font-medium text-zinc-600">
-                  Receive payments by card/cash
-                </h5>
-              </FlexContainer>
-              <FlexContainer variant="row-start" gap="lg" alignItems="center">
-                <Scan className="h-6 w-5 text-purple-600" />
-                <h5 className="text-base font-medium text-zinc-600">
-                  QR based bill receipt
-                </h5>
-              </FlexContainer>
-            </FlexContainer>
+            </div>
           </div>
         </FlexContainer>
       </FlexContainer>
@@ -263,14 +338,14 @@ export default function Home() {
           className="radial_purple_light_2 rounded-xl border px-5 py-10 transition-all duration-200 ease-in-out hover:bg-purple-50"
           gap="sm"
         >
+          {" "}
           <h3 className="text-center font-dm-serif-display text-3xl font-medium text-black">
-            House Keeping Module
+            Property Procurement Software
           </h3>
-
           <p className="mt-4 max-w-md text-center text-base text-zinc-600">
-            The Hotel Software Housekeeping module tracks Dirty/Clean rooms,
-            Room Blocking, Lost & Found, Guest requests, Complaints & Clearance,
-            Laundry Billing
+            Rofabs Procurement & Purchase module manages Indents from
+            departments, Kitchen requisitions, Purchase order, Vendor Analysis,
+            Material Receipts & Purchases.
           </p>
           <Image
             src={"/building.png"}
@@ -285,14 +360,14 @@ export default function Home() {
           className="radial_purple_light_2 rounded-xl border px-5 py-10 transition-all duration-200 ease-in-out hover:bg-purple-50"
           gap="sm"
         >
-          {" "}
           <h3 className="text-center font-dm-serif-display text-3xl font-medium text-black">
-            Property Procurement Software
+            Material Management Module
           </h3>
+
           <p className="mt-4 max-w-md text-center text-base text-zinc-600">
-            Aatithya Procurement & Purchase module manages Indents from
-            departments, Kitchen requisitions, Purchase order, Vendor Analysis,
-            Material Receipts & Purchases.
+            The Hotel Software Material Management module manages multi vendors,
+            material inventory, purchase orders, utilisation history and
+            reports. Waste management module to save unwanted costs.
           </p>
           <Image
             src={"/user-with-mobile.png"}
@@ -303,10 +378,107 @@ export default function Home() {
           />
         </FlexContainer>
       </div>
+      <FlexContainer
+        variant="column-start"
+        className="relative gap-12 px-10 py-10"
+      >
+        <FlexContainer variant="row-center">
+          <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
+            Manage your Hotel Operations with Ease with Rofabs
+          </h3>
+        </FlexContainer>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <Link href={"/material-management"}>
+            <FlexContainer
+              variant="column-start"
+              className="rounded-xl border bg-white p-4 shadow-xl"
+            >
+              <Image
+                src={"https://picsum.photos/id/237/500/500"}
+                width={500}
+                height={500}
+                alt="image"
+                className="h-auto max-h-[200px] w-full rounded-xl object-cover"
+              />
+              <h5 className="font-dm-serif-display text-xl font-medium text-black">
+                Material Management Module
+              </h5>
+              <p className="text-zinc-600">
+                The Hotel Software Material Management module manages Stock
+                transfers, Stock adjustments, Stock Valuation, Stock Reports,
+                Stock Ledger
+              </p>
+              <FlexContainer variant="row-end">
+                <Button variant="ghost" className="rounded-3xl">
+                  Learn More <ChevronRight className="h-4 w-4" />
+                </Button>
+              </FlexContainer>
+            </FlexContainer>
+          </Link>
+          <FlexContainer
+            variant="column-start"
+            className="rounded-xl border bg-white p-4 shadow-xl"
+          >
+            <Image
+              src={"https://picsum.photos/id/399/500/500"}
+              width={500}
+              height={500}
+              alt="image"
+              className="h-auto max-h-[200px] w-full rounded-xl object-cover"
+            />
+            <h5 className="font-dm-serif-display text-xl font-medium text-black">
+              KSR (Kitchen Service Request) Module
+            </h5>
+            <p className="text-zinc-600">
+              The Hotel Software KSR module manages Kitchen requisitions, Food
+              orders, Food delivery, Kitchen billing & KOT
+            </p>
+          </FlexContainer>
+          <FlexContainer
+            variant="column-start"
+            className="rounded-xl border bg-white p-4 shadow-xl"
+          >
+            <Image
+              src={"https://picsum.photos/id/390/500/500"}
+              width={500}
+              height={500}
+              alt="image"
+              className="h-auto max-h-[200px] w-full rounded-xl object-cover"
+            />
+            <h5 className="font-dm-serif-display text-xl font-medium text-black">
+              Employee Management Module
+            </h5>
+            <p className="text-zinc-600">
+              The Hotel Software Employee Management module manages Employee
+              details, Employee attendance, Employee salary, Employee reports
+            </p>
+          </FlexContainer>
+          <FlexContainer
+            variant="column-start"
+            className="rounded-xl border bg-white p-4 shadow-xl"
+          >
+            <Image
+              src={"https://picsum.photos/id/380/500/500"}
+              width={500}
+              height={500}
+              alt="image"
+              className="h-auto max-h-[200px] w-full rounded-xl object-cover"
+            />
+            <h5 className="font-dm-serif-display text-xl font-medium text-black">
+              Banquet Management Module
+            </h5>
+            <p className="text-zinc-600">
+              The Hotel Software Banquet Management module manages Banquet
+              bookings, Banquet billing, Banquet reports, Banquet occupancy
+            </p>
+          </FlexContainer>
+        </div>
+      </FlexContainer>
       <FlexContainer variant="column-start" className="gap-11 px-10 py-20">
         <FlexContainer variant="row-center">
           <h3 className="max-w-2xl text-center font-dm-serif-display text-5xl font-medium text-black">
-            Managing and Serving different type of properties{" "}
+            {/* Managing and Serving different type of properties{" "} */}
+            Features to Look for in a Property Management Software
           </h3>
         </FlexContainer>
         <Tabs />
@@ -320,7 +492,7 @@ export default function Home() {
             Why Choose Us?
           </h3>
         </FlexContainer>
-        <div className="grid grid-cols-3 gap-10">
+        <div className="grid gap-10 md:grid-cols-3">
           <FlexContainer
             variant="column-start"
             className="rounded-2xl bg-white p-5"
@@ -377,17 +549,17 @@ export default function Home() {
           </FlexContainer>
         </div>
       </FlexContainer>
-      <FlexContainer className="relative -mt-28 p-10">
+      <FlexContainer className="relative -mt-28 p-5 md:p-10">
         <FlexContainer
           variant="column-start"
-          className="pc-10 w-full gap-10 rounded-3xl border border-zinc-200 bg-white py-16 shadow-2xl shadow-zinc-200"
+          className="w-full gap-10 rounded-3xl border border-zinc-200 bg-white px-10 py-16 shadow-2xl shadow-zinc-200"
         >
           <FlexContainer variant="row-center">
             <h3 className="max-w-xl text-center font-dm-serif-display text-3xl font-medium text-black">
               Trusted By 100+ Property Managers
             </h3>
           </FlexContainer>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid gap-5 md:grid-cols-3">
             <FlexContainer variant="column-center" className="p-5" gap="md">
               <Image
                 src={"/trustpilot.png"}
@@ -486,184 +658,27 @@ export default function Home() {
       </FlexContainer>
       <FlexContainer
         variant="column-start"
-        className="relative bg-zinc-100 px-10 py-20"
+        className="relative px-10 py-20"
+        gap="3xl"
+        id="pricing"
       >
-        <div className="grid grid-cols-4 gap-5">
-          <FlexContainer variant="column-start">
-            <h4 className="font-dm-serif-display text-2xl font-medium text-black">
-              Rofabs
-            </h4>
-            <p className="text-sm text-zinc-600">
-              <span className="font-semibold text-black">Address:</span> Plot #
-              682, 5th Floor, Babukhan Rasheed Plaza, Rd Number 36, Gachibouli,
-              Hyderabad, Telangana 500033
-            </p>
-          </FlexContainer>
-          <FlexContainer variant="column-start" className="md:pl-10">
-            <h5 className="text-sm font-semibold text-black">
-              Product Features
-            </h5>
-            <FlexContainer variant="column-start" gap="sm">
-              {[
-                { label: "Front Desk", href: "/" },
-                {
-                  label: "Hotel Booking Engine",
-                  href: "/",
-                },
-                {
-                  label: "Channel manager",
-                  href: "/",
-                },
-                {
-                  label: "Hotel website builder",
-                  href: "/",
-                },
-                {
-                  label: "Hotel Payment Processing",
-                  href: "/",
-                },
-                {
-                  label: "Guest Engagement",
-                  href: "/",
-                },
-                {
-                  label: "Mobile app",
-                  href: "/",
-                },
-                {
-                  label: "Insights",
-                  href: "/",
-                },
-                {
-                  label: "App Store",
-                  href: "/",
-                },
-                {
-                  label: "MetaSearch",
-                  href: "/",
-                },
-              ].map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="text-sm text-zinc-600"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </FlexContainer>
-          </FlexContainer>
-          <FlexContainer variant="column-start">
-            <h5 className="text-sm font-semibold text-black">Business Type</h5>
-            <FlexContainer variant="column-start" gap="sm">
-              {[
-                { label: "Hotel management software", href: "/" },
-                {
-                  label: "Motel management software",
-                  href: "/",
-                },
-                {
-                  label: "Bed & Breakfast software",
-                  href: "/",
-                },
-                {
-                  label: "Guest house software",
-                  href: "/",
-                },
-                {
-                  label: "Hotel reservation software",
-                  href: "/",
-                },
-                {
-                  label: "Property management system",
-                  href: "/",
-                },
-                {
-                  label: "Best Hotel PMS",
-                  href: "/",
-                },
-                {
-                  label: "Lodge management software",
-                  href: "/",
-                },
-                {
-                  label: "Apartment management software",
-                  href: "/",
-                },
-              ].map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="text-sm text-zinc-600"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </FlexContainer>
-          </FlexContainer>
-          <FlexContainer variant="column-start">
-            <h5 className="text-sm font-semibold text-black">Company</h5>
-            <FlexContainer variant="column-start" gap="sm">
-              {[
-                { label: "About Us", href: "/" },
-                {
-                  label: "Careers",
-                  href: "/",
-                },
-                {
-                  label: "Contact Us",
-                  href: "/",
-                },
-                {
-                  label: "Blog",
-                  href: "/",
-                },
-
-                {
-                  label: "Terms & Conditions",
-                  href: "/",
-                },
-                {
-                  label: "Privacy Policy",
-                  href: "/",
-                },
-              ].map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className="text-sm text-zinc-600"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </FlexContainer>
-          </FlexContainer>
-        </div>
-      </FlexContainer>
-      <FlexContainer
-        variant="row-between"
-        className="border-t border-t-zinc-300 bg-zinc-100 p-10"
-      >
-        <FlexContainer variant="row-start" gap="sm">
-          <p className="text-sm text-zinc-600">
-            © 2024 Rofabs. All rights reserved.
-          </p>
-          <Link
-            href="/"
-            className="text-sm text-zinc-600 transition-all duration-300 ease-in-out hover:text-zinc-900"
-          >
-            Terms & Conditions
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-zinc-600 transition-all duration-300 ease-in-out hover:text-zinc-900"
-          >
-            Privacy Policy
-          </Link>
+        <FlexContainer variant="row-center">
+          <h3 className="max-w-xl text-center text-5xl font-medium text-black">
+            Our Pricing
+          </h3>
         </FlexContainer>
-        <p className="text-sm text-zinc-600">
-          Made with ❤️ by Vijetha&apos;s Software
-        </p>
+        <FlexContainer variant="row-center" gap="xl" className="mb-10">
+          <Button
+            variant="default"
+            className="rounded-3xl bg-indigo-600 hover:bg-indigo-700"
+          >
+            Yearly (-20%)
+          </Button>
+          <Button variant="ghost" className="rounded-3xl">
+            Monthly
+          </Button>
+        </FlexContainer>
+        <PricingTable />
       </FlexContainer>
     </FlexContainer>
   );

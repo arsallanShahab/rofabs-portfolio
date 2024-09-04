@@ -40,7 +40,7 @@ const DropdownContent = (props: DropdownContentProps) => {
         "pointer-events-none absolute inset-x-0 top-[90%] z-[850] flex w-[280px] origin-top -translate-y-1 scale-90 flex-col rounded-xl border bg-white p-3 opacity-0 shadow-xl transition-all duration-300 ease-in-out *:w-full group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100",
         props.size === "sm" && "w-[200px]",
         props.size === "md" && "w-[280px]",
-        props.size === "lg" && "grid w-[520px] grid-cols-2",
+        props.size === "lg" && "grid w-[540px] grid-cols-2",
       )}
     >
       {props.children}
@@ -58,12 +58,12 @@ const DropdownItem = (props: {
     <Link
       href={props.href}
       className={cn(
-        "block rounded-lg px-3 py-2 text-xs font-medium transition-all duration-150 ease-in-out hover:bg-purple-600/5 hover:text-purple-700",
+        "group/link block rounded-lg px-3 py-2 text-xs font-medium transition-all duration-150 ease-in-out hover:bg-purple-600 hover:text-white",
         props.className,
       )}
     >
       {props.children}
-      <span className="mt-0.5 block text-xs font-normal text-gray-500 dark:text-gray-400">
+      <span className="mt-0.5 block text-xs font-normal text-gray-600 group-hover/link:text-white/75 dark:text-gray-400">
         {props.description}
       </span>
     </Link>

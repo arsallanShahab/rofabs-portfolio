@@ -48,3 +48,8 @@ html.lenis body {
     rgba(250, 245, 255, 0.25)
   );
 }
+
+.hover-grid-item:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
