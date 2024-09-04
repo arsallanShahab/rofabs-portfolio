@@ -35,6 +35,7 @@ const Page = (props: Props) => {
                 phoneNumber: "",
                 workEmail: "",
                 propertyType: "",
+                noOfProperties: "",
                 remarks: "",
               }}
               onSubmit={(values, actions) => {
@@ -138,6 +139,20 @@ const Page = (props: Props) => {
                           </SelectItem>
                         )}
                       </Select>
+                      <Input
+                        name="noOfProperties"
+                        label="Number of Properties"
+                        labelPlacement="outside"
+                        placeholder="Enter the number of properties"
+                        radius="sm"
+                        classNames={{
+                          inputWrapper: "border border-zinc-300",
+                          mainWrapper: "md:col-span-2",
+                        }}
+                        value={values.noOfProperties}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
                       <Textarea
                         name="remarks"
                         label="Remarks"
